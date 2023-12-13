@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catálogo de Receitas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #ffc107;
+        }
+
+        .container-fluid {
+            background-color: #ffc107;
+        }
+
+        #pnlCatalogo {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .card {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body onload="preencheCatalogo()">
+    <div class="container-fluid">
+        <h1>Catálogo de Receitas</h1>
+        <div id="pnlCatalogo"></div>
+    </div>
+
+    <script>
+        const receitas = [
+            {
+                titulo: "Tender com molho agridoce de laranja",
+                imagem: "3832-original.jpg",
+                preparo: "Deixe o tender de molho no suco de laranja por 2 horas. Com a ponta de uma faca risque a superfície do tender de modo que se formem losangos. Nos vértices de cada losango, espete cravos-da-índia.",
+                ingredientes: ["1 tender tipo bolinha (cerca de 1,5 kg", "2 colheres (sopa) de manteiga", "1 xícara (chá) de suco de laranja", "Cravos-da-índia"]
+            },
+            {
+                titulo: "Frango assado inteiro e descomplicado",
+                imagem: "355489-original.jpg",
+                preparo: "Pegue o frango, retire os miúdos.Lave-o por dentro e por fora com água e limão, escorra.Secar com um guardanapo de pano dentro e fora, em seguida passar sal por dentro e por fora, fazer o mesmo com a margarina ou manteiga.Colocar em uma assadeira, adicionar a cebola inteira e os galhos de alecrim e manjericão no interior do frango Seara com um cubinho de margarina.Levar para assar em forno médio até começar a dourar mais ou menos 40 minutos, aumentar o forno para o máximo para dourar e ficar crocante.",
+                ingredientes: ["1 frango inteiro", "Sal", "alecrim e manjericão ou ervas finas desidratadas","margarina ou manteiga com sal", "1 cebola grande descascada inteira","limao"]
+            },
+            {
+                titulo: "Tender com molho agridoce de laranja",
+                imagem: "3832-original.jpg",
+                preparo: "Deixe o tender de molho no suco de laranja por 2 horas. Com a ponta de uma faca risque a superfície do tender de modo que se formem losangos. Nos vértices de cada losango, espete cravos-da-índia.",
+                ingredientes: ["1 tender tipo bolinha (cerca de 1,5 kg", "2 colheres (sopa) de manteiga", "1 xícara (chá) de suco de laranja", "Cravos-da-índia"]
+            },
+            {
+                titulo: "Frango assado inteiro e descomplicado",
+                imagem: "355489-original.jpg",
+                preparo: "Pegue o frango, retire os miúdos.Lave-o por dentro e por fora com água e limão, escorra.Secar com um guardanapo de pano dentro e fora, em seguida passar sal por dentro e por fora, fazer o mesmo com a margarina ou manteiga.Colocar em uma assadeira, adicionar a cebola inteira e os galhos de alecrim e manjericão no interior do frango Seara com um cubinho de margarina.Levar para assar em forno médio até começar a dourar mais ou menos 40 minutos, aumentar o forno para o máximo para dourar e ficar crocante.",
+                ingredientes: ["1 frango inteiro", "Sal", "alecrim e manjericão ou ervas finas desidratadas","margarina ou manteiga com sal", "1 cebola grande descascada inteira","limao"]
+            }
+        ];
+
+        function getListaIngredientes(receita) {
+            const listaHTML = "<ul>" + receita.ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).reduce((a, b) => a + b, "") + "</ul>";
+            return listaHTML;
+        }
+
+        function getCard(receita) {
+            return `
+                <div class="card" style="width: 250px;">
+                    <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">${receita.titulo}</h5>
+                        <div class="card-text">${getListaIngredientes(receita)}</div>
+                        <hr>
+                        <p>${receita.preparo}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function preencheCatalogo() {
+            const pnlCatalogo = document.getElementById('pnlCatalogo');
+            const htmlReceitas = receitas.map(receita => getCard(receita)).reduce((a, b) => a + b, "");
+            pnlCatalogo.innerHTML = htmlReceitas;
+        }
+    </script>
+</body>
+</html>
